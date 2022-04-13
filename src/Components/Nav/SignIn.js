@@ -1,6 +1,7 @@
-import { auth, firebaseInstance } from '../modules/firebase';
+import React from 'react';
+import { auth, firebaseInstance } from '../../modules/firebase';
 import { FcGoogle } from "react-icons/fc";
-import { LogButton } from '../styled/LogButton';
+import { LogButton } from '../../styled/LogButton';
 
 
 const SignIn = () => {

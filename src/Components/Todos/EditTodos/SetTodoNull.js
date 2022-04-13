@@ -1,4 +1,15 @@
+import React from 'react';
 import styled from 'styled-components';
+
+const SetTodoNull = () => {
+    return (
+        <>
+            <Form onSubmit={e => e.preventDefault()}>
+                <Input type="text" placeholder="드래그 해서 순서를 변경하세요" readOnly />
+            </Form>
+        </>
+    )
+}
 
 const Form = styled.form`
     display : flex;
@@ -20,15 +31,5 @@ const Input = styled.input`
         text-overflow: ellipsis;
     }
 `;
-
-const SetTodoNull = () => {
-    return (
-        <>
-            <Form onSubmit={e => e.preventDefault()}>
-                <Input type="text" placeholder="드래그 해서 순서를 변경하세요" readOnly />
-            </Form>
-        </>
-    )
-}
 
 export default SetTodoNull;

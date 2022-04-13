@@ -1,9 +1,50 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { signIn } from './store/user'
 import { auth } from './modules/firebase';
 import styled from 'styled-components';
 import GlobalStyle from './styled/Globalstyle';
-import Navigator from './Components/Navigator';
-import TodosContainer from './Components/TodosContainer';
+import Navigator from './Components/Nav/Navigator';
+import TodosContainer from './Components/Todos/TodosContainer';
+
+const App = () => {
+    const [init, setInint] = useState(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                dispatch(
+                    signIn({
+                        email: user.email,
+                        uid: user.uid
+                    })
+                );
+            }
+
+            setInint(true);
+        })
+    }, [dispatch]);
+
+    return (
+        <>
+            <GlobalStyle />
+            <Container>
+                <Title>To Do List</Title>
+                {
+                    init ? (
+                        <>
+                            <Navigator />
+                            <TodosContainer />
+                        </>
+                    ) : (
+                        "Loading..."
+                    )
+                }
+            </Container>
+        </>
+    )
+}
 
 const Title = styled.h1`
     text-align : center;
@@ -22,48 +63,5 @@ const Container = styled.section`
     border-radius: 25px;
     padding: 25px;
 `;
-
-const App = () => {
-    const [user, setUser] = useState({});
-    const [init, setInint] = useState(false);
-
-    useEffect(() => {
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                setUser({
-                    email: user.email,
-                    uid: user.uid
-                })
-            } else {
-                setUser(null);
-            }
-            setInint(true);
-        })
-    }, []);
-
-    const logOut = () => {
-        auth.signOut();
-        setUser(null);
-    }
-
-    return (
-        <>
-            <GlobalStyle />
-            <Container>
-                <Title>To Do List</Title>
-                {
-                    init ? (
-                        <>
-                            <Navigator user={user} logOut={logOut} />
-                            <TodosContainer user={user} />
-                        </>
-                    ) : (
-                        "Loading..."
-                    )
-                }
-            </Container>
-        </>
-    )
-}
 
 export default App;

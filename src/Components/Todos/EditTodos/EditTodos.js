@@ -1,49 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { db } from '../modules/firebase';
+import { useSelector } from 'react-redux';
+import { db } from '../../../modules/firebase';
 import { MdCheckBoxOutlineBlank, MdCheckBox } from 'react-icons/md';
 import styled from 'styled-components';
 import ReactDragList from 'react-drag-list';
 
-const List = styled.li`
-    width : 100%;
-    display : flex;
-    justify-content : space-between;
-    border-radius : 16px;
-    padding : 16px;
-    margin : 32px 0;
-    background-color : #f2f3f7;
-    box-shadow : -6px -6px 8px rgba(255, 255, 255, 0.9), 5px 5px 8px rgba(0, 0, 0, 0.07);
-`;
-
-const TextContainer = styled.div`
-    width: calc(100% - 32px);
-    display : flex;
-    align-items : center;
-
-    & svg {
-        min-width : 20px;
-        height : 20px;
-        margin-right : 10px;
-    }
-`;
-
-const Text = styled.span`
-    &.overflow {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-    }
-
-    &.checked {
-        color: #abb5bd;
-        text-decoration: line-through;
-        transition : all 0.25s linear;
-    }
-`;
-
-const EditTodos = ({ user }) => {
+const EditTodos = () => {
     const [todos, setTodos] = useState([]);
-    const uid = user ? String(user.uid) : null;
+    const uid = useSelector(state => state.user.uid);
 
     useEffect(() => {
         db.collection("todos").where("uid", "==", uid).orderBy("dataId").get().then(querySnapshot => {
@@ -102,5 +66,42 @@ const EditTodos = ({ user }) => {
         />
     )
 }
+
+const List = styled.li`
+    width : 100%;
+    display : flex;
+    justify-content : space-between;
+    border-radius : 16px;
+    padding : 16px;
+    margin : 32px 0;
+    background-color : #f2f3f7;
+    box-shadow : -6px -6px 8px rgba(255, 255, 255, 0.9), 5px 5px 8px rgba(0, 0, 0, 0.07);
+`;
+
+const TextContainer = styled.div`
+    width: calc(100% - 32px);
+    display : flex;
+    align-items : center;
+
+    & svg {
+        min-width : 20px;
+        height : 20px;
+        margin-right : 10px;
+    }
+`;
+
+const Text = styled.span`
+    &.overflow {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    &.checked {
+        color: #abb5bd;
+        text-decoration: line-through;
+        transition : all 0.25s linear;
+    }
+`;
 
 export default EditTodos;
