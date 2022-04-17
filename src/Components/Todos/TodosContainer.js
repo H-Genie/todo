@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import EditTodos from './EditTodos/EditTodos';
-import SetTodo from './SetTodo';
-import SetTodoNull from './EditTodos/SetTodoNull';
+import DragTodos from './Drag/DragTodos';
+import InputTodo from './InputTodo';
+import InputTodoNull from './Drag/InputTodoNull';
 import Todos from './Todos';
 
 const TodosContainer = () => {
@@ -17,7 +17,7 @@ const TodosContainer = () => {
             {
                 uid ? (
                     <>
-                        {alignTodos ? <SetTodoNull /> : <SetTodo />}
+                        {alignTodos ? <InputTodoNull /> : <InputTodo />}
 
                         <ButtonContainer>
                             <p>순서 변경</p>
@@ -27,7 +27,7 @@ const TodosContainer = () => {
                             </EditButton>
                         </ButtonContainer>
 
-                        {alignTodos ? <EditTodos /> : <Todos />}
+                        {alignTodos ? <DragTodos /> : <Todos />}
                     </>
                 ) : (
                     null

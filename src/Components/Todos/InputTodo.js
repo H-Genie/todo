@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { db } from '../../modules/firebase';
 import styled from 'styled-components';
 
-const SetTodo = () => {
+const InputTodo = () => {
     const uid = useSelector(state => state.user.uid);
     const onSubmit = e => {
         e.preventDefault();
@@ -73,4 +73,4 @@ const Button = styled.button`
     }
 `;
 
-export default React.memo(SetTodo);
+export default React.memo(InputTodo);

@@ -5,7 +5,7 @@ import { MdCheckBoxOutlineBlank, MdCheckBox } from 'react-icons/md';
 import styled from 'styled-components';
 import ReactDragList from 'react-drag-list';
 
-const EditTodos = () => {
+const DragTodos = () => {
     const [todos, setTodos] = useState([]);
     const uid = useSelector(state => state.user.uid);
 
@@ -104,4 +104,4 @@ const Text = styled.span`
     }
 `;
 
-export default EditTodos;
+export default DragTodos;

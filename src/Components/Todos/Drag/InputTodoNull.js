@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SetTodoNull = () => {
+const InputTodo = () => {
     return (
         <>
             <Form onSubmit={e => e.preventDefault()}>
@@ -32,4 +32,4 @@ const Input = styled.input`
     }
 `;
 
-export default SetTodoNull;
+export default InputTodo;
