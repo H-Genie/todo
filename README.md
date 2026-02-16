@@ -1,1 +1,1 @@
-https://h-genie.github.io/todo/
+https://todo-h-genie.vercel.app
